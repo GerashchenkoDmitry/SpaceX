@@ -9,7 +9,7 @@ import Foundation
 
 struct Rocket {
     var id: String
-//    let image: String
+    let images: [String]
     let name: String
     let firstFlight: String
     let country: String
@@ -20,7 +20,7 @@ struct Rocket {
 extension Rocket: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
-//        case image = "flickr_images"
+        case images = "flickr_images"
         case name
         case firstFlight = "first_flight"
         case country
@@ -43,12 +43,4 @@ extension FirstStage: Decodable {
     }
 }
 
-struct Images {
-    let images: [String]
-}
 
-extension Images: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case images = "flickr_images"
-    }
-}

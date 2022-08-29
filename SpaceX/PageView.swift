@@ -16,7 +16,7 @@ final class PageView: UIView {
     init(rocket: Rocket) {
         self.rocket = rocket
         super.init(frame: .zero)
-        
+        self.backgroundColor = .systemBackground
         configureRocketImage()
         configureRocketName()
     }
@@ -26,10 +26,18 @@ final class PageView: UIView {
     }
     
     private func configureRocketImage() {
-        rocketImage.contentMode = .scaleAspectFit
-        rocketImage.clipsToBounds = false
-        rocketImage.image = UIImage(systemName: "circle.grid.cross.fill")
+        rocketImage.contentMode = .scaleToFill
+        rocketImage.clipsToBounds = true
         
+        for i in 0..<rocket.images.count {
+            guard
+                let imageUrl = URL(string: rocket.images[i]),
+                let imageData = try? Data(contentsOf: imageUrl)
+            else { return }
+            DispatchQueue.main.async {
+                self.rocketImage.image = UIImage(data: imageData)
+            }
+        }
         self.addSubview(rocketImage)
     }
     

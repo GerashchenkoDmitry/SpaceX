@@ -64,13 +64,6 @@ final class ViewController: UIViewController {
     private func configureScrollView() {
         scrollView.contentSize = CGSize(width: view.frame.size.width * CGFloat(rockets.count), height: scrollView.frame.size.height)
         scrollView.isPagingEnabled = true
-        let colors: [UIColor] = [
-            .systemRed,
-            .systemYellow,
-            .systemBlue,
-            .systemTeal,
-            .systemGreen
-        ]
         
         for i in 0..<rockets.count {
             let page = PageView(rocket: rockets[i])
@@ -78,14 +71,7 @@ final class ViewController: UIViewController {
                                 y: 0,
                                 width: view.frame.size.width,
                                 height: scrollView.frame.size.height)
-            page.backgroundColor = colors[i]
-
             scrollView.addSubview(page)
-//            let page = UIView(frame: CGRect(x: CGFloat(i) * view.frame.size.width,
-//                                            y: 0,
-//                                            width: view.frame.size.width,
-//                                            height: scrollView.frame.size.height))
-//            scrollView.addSubview(page)
         }
     }
     
