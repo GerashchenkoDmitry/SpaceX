@@ -12,20 +12,27 @@ final class PageView: UIView {
     private let rocket: Rocket
     private let rocketImage = UIImageView()
     private let rocketName = UILabel()
+    private let firstFlightLabel = UILabel()
+    private let country = UILabel()
+    private let cost = UILabel()
+    private let firstStep = UILabel()
+    private let engines = UILabel()
+    private let fuelAmount = UILabel()
+    private let burnTimeSec = UILabel()
     
     init(rocket: Rocket) {
         self.rocket = rocket
         super.init(frame: .zero)
         self.backgroundColor = .systemBackground
-        configureRocketImage()
-        configureRocketName()
+        configureRocketImageView()
+        configureRocketNameLabel()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureRocketImage() {
+    private func configureRocketImageView() {
         rocketImage.contentMode = .scaleToFill
         rocketImage.clipsToBounds = true
         
@@ -41,9 +48,16 @@ final class PageView: UIView {
         self.addSubview(rocketImage)
     }
     
-    private func configureRocketName() {
+    private func configureRocketNameLabel() {
         rocketName.text = rocket.name
         rocketName.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        
+        self.addSubview(rocketName)
+    }
+    
+    private func configureFirstFlightLabel() {
+        firstFlightLabel.text = rocket.name
+        firstFlightLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         
         self.addSubview(rocketName)
     }

@@ -85,9 +85,9 @@ final class ViewController: UIViewController {
                                              height: view.frame.size.height)
         // PageControl
         pageControl.frame = CGRect(x: 0,
-                                   y: view.frame.size.height - 100,
+                                   y: view.frame.size.height - 70,
                                    width: view.frame.size.width,
-                                   height: 100)
+                                   height: 70)
         // ScrollView
         scrollView.frame = CGRect(x: 0,
                                   y: 0,
