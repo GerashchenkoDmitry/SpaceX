@@ -15,6 +15,7 @@
 		DF1C3C7528B4EAB60023CF64 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1C3C7428B4EAB60023CF64 /* Rocket.swift */; };
 		DF1C3C7928B658FA0023CF64 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1C3C7828B658FA0023CF64 /* NetworkManager.swift */; };
 		DF1C3C7C28B65C7B0023CF64 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1C3C7B28B65C7B0023CF64 /* ScrollView.swift */; };
+		DF65C03628BC970100A85527 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF65C03528BC970100A85527 /* PageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DF1C3C7428B4EAB60023CF64 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
 		DF1C3C7828B658FA0023CF64 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DF1C3C7B28B65C7B0023CF64 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		DF65C03528BC970100A85527 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				DF1C3C5E28B4E8670023CF64 /* AppDelegate.swift */,
 				DF1C3C6028B4E8670023CF64 /* SceneDelegate.swift */,
 				DF1C3C6228B4E8670023CF64 /* ViewController.swift */,
+				DF65C03528BC970100A85527 /* PageView.swift */,
 				DF1C3C7B28B65C7B0023CF64 /* ScrollView.swift */,
 				DF1C3C7828B658FA0023CF64 /* NetworkManager.swift */,
 				DF1C3C7428B4EAB60023CF64 /* Rocket.swift */,
@@ -148,6 +151,7 @@
 				DF1C3C6128B4E8670023CF64 /* SceneDelegate.swift in Sources */,
 				DF1C3C7528B4EAB60023CF64 /* Rocket.swift in Sources */,
 				DF1C3C7C28B65C7B0023CF64 /* ScrollView.swift in Sources */,
+				DF65C03628BC970100A85527 /* PageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

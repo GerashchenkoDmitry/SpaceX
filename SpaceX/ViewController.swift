@@ -11,35 +11,46 @@ final class ViewController: UIViewController {
     
     private let activityIndicatorView = UIActivityIndicatorView()
     private let scrollView = UIScrollView()
+    private let rocketTitle = UILabel()
     private var rockets = [Rocket]()
     private let url = "https://api.spacexdata.com/v4/rockets"
     private let pageControl = UIPageControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureActivityViewIndicator()
         fetchData()
         scrollView.delegate = self
         view.addSubview(scrollView)
-        configurePageControl()
+    }
+    
+    private func configureActivityViewIndicator() {
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.hidesWhenStopped = true
+        view.addSubview(activityIndicatorView)
+    }
+    
+    private func fetchData() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+        
+        NetworkManager.fetchRockets(url: url) { (rockets) in
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.rockets = rockets
+                self.configurePageControl()
+            }
+        }
+    }
+    
+    private func configureRocketTitle() {
+        
     }
     
     @objc private func pageControlValueChanged(_ sender: UIPageControl) {
         let current = sender.currentPage
         scrollView.setContentOffset(CGPoint(x: CGFloat(current) * view.frame.size.width,
                                             y: 0), animated: true)
-    }
-    
-    private func fetchData() {
-        NetworkManager.fetchRockets(url: url) { (rockets) in
-            self.rockets = rockets
-            print(rockets.count)
-        }
-    }
-    
-    private func configureActivityIndicator() {
-        activityIndicatorView.isHidden = false
-        activityIndicatorView.startAnimating()
-        view.addSubview(activityIndicatorView)
     }
     
     private func configurePageControl() {
@@ -51,7 +62,7 @@ final class ViewController: UIViewController {
     }
     
     private func configureScrollView() {
-        scrollView.contentSize = CGSize(width: view.frame.size.width * 5, height: scrollView.frame.size.height)
+        scrollView.contentSize = CGSize(width: view.frame.size.width * CGFloat(rockets.count), height: scrollView.frame.size.height)
         scrollView.isPagingEnabled = true
         let colors: [UIColor] = [
             .systemRed,
@@ -61,13 +72,20 @@ final class ViewController: UIViewController {
             .systemGreen
         ]
         
-        for i in 0..<5 {
-            let page = UIView(frame: CGRect(x: CGFloat(i) * view.frame.size.width,
-                                            y: 0,
-                                            width: view.frame.size.width,
-                                            height: scrollView.frame.size.height))
+        for i in 0..<rockets.count {
+            let page = PageView(rocket: rockets[i])
+            page.frame = CGRect(x: CGFloat(i) * view.frame.size.width,
+                                y: 0,
+                                width: view.frame.size.width,
+                                height: scrollView.frame.size.height)
             page.backgroundColor = colors[i]
+
             scrollView.addSubview(page)
+//            let page = UIView(frame: CGRect(x: CGFloat(i) * view.frame.size.width,
+//                                            y: 0,
+//                                            width: view.frame.size.width,
+//                                            height: scrollView.frame.size.height))
+//            scrollView.addSubview(page)
         }
     }
     
@@ -75,8 +93,10 @@ final class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         // ActivityView
-        activityIndicatorView.frame = view.frame
-        
+        activityIndicatorView.frame = CGRect(x: 0,
+                                             y: 0,
+                                             width: view.frame.size.width,
+                                             height: view.frame.size.height)
         // PageControl
         pageControl.frame = CGRect(x: 0,
                                    y: view.frame.size.height - 100,
