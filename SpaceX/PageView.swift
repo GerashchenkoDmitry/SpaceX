@@ -10,8 +10,8 @@ import UIKit
 final class PageView: UIView {
     
     private let rocket: Rocket
-    private let rocketImage = UIImageView()
-    private let rocketName = UILabel()
+    private let rocketImageLabel = UIImageView()
+    private let rocketNameLabel = UILabel()
     private let firstFlightLabel = UILabel()
     private let country = UILabel()
     private let cost = UILabel()
@@ -26,6 +26,7 @@ final class PageView: UIView {
         self.backgroundColor = .systemBackground
         configureRocketImageView()
         configureRocketNameLabel()
+        configureFirstFlightLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -33,8 +34,8 @@ final class PageView: UIView {
     }
     
     private func configureRocketImageView() {
-        rocketImage.contentMode = .scaleToFill
-        rocketImage.clipsToBounds = true
+        rocketImageLabel.contentMode = .scaleToFill
+        rocketImageLabel.clipsToBounds = true
         
         for i in 0..<rocket.images.count {
             guard
@@ -42,30 +43,33 @@ final class PageView: UIView {
                 let imageData = try? Data(contentsOf: imageUrl)
             else { return }
             DispatchQueue.main.async {
-                self.rocketImage.image = UIImage(data: imageData)
+                self.rocketImageLabel.image = UIImage(data: imageData)
             }
         }
-        self.addSubview(rocketImage)
+        self.addSubview(rocketImageLabel)
     }
     
     private func configureRocketNameLabel() {
-        rocketName.text = rocket.name
-        rocketName.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        rocketNameLabel.text = rocket.name
+        rocketNameLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         
-        self.addSubview(rocketName)
+        self.addSubview(rocketNameLabel)
     }
     
     private func configureFirstFlightLabel() {
-        firstFlightLabel.text = rocket.name
-        firstFlightLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        firstFlightLabel.text = "First flight: \(rocket.firstFlight)"
+//        firstFlightLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         
-        self.addSubview(rocketName)
+        self.addSubview(firstFlightLabel)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        rocketImage.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 400)
-        rocketName.frame = CGRect(x: 40, y: rocketImage.frame.maxY + 40, width: self.frame.size.width - 80, height: 22)
+        rocketImageLabel.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 400)
+        
+        rocketNameLabel.frame = CGRect(x: 40, y: rocketImageLabel.frame.maxY + 40, width: self.frame.size.width - 80, height: 22)
+        
+        firstFlightLabel.frame = CGRect(x: 40, y: rocketNameLabel.frame.maxY + 16, width: self.frame.size.width - 80, height: 22)
     }
 }
