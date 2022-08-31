@@ -43,10 +43,6 @@ final class ViewController: UIViewController {
         }
     }
     
-    private func configureRocketTitle() {
-        
-    }
-    
     @objc private func pageControlValueChanged(_ sender: UIPageControl) {
         let current = sender.currentPage
         scrollView.setContentOffset(CGPoint(x: CGFloat(current) * view.frame.size.width,
@@ -55,7 +51,7 @@ final class ViewController: UIViewController {
     
     private func configurePageControl() {
         pageControl.numberOfPages = self.rockets.count
-        pageControl.backgroundColor = .systemGray3
+        pageControl.backgroundColor = .systemBackground
         pageControl.addTarget(self, action: #selector(pageControlValueChanged(_:)), for: .valueChanged)
         
         view.addSubview(pageControl)
