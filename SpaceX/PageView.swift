@@ -31,8 +31,8 @@ final class PageView: UIView {
     private let fuelAmountLabel = UILabel()
     private let fuelAmountValue = UILabel()
 
-    private let burnTimeSecLabel = UILabel()
-    private let burnTimeSecValue = UILabel()
+    private let burnTimeLabel = UILabel()
+    private let burnTimeValue = UILabel()
     
     init(rocket: Rocket) {
         self.rocket = rocket
@@ -57,6 +57,9 @@ final class PageView: UIView {
         
         configureFuelAmountLabel()
         configureFuelAmountValue()
+        
+        configureBurnTimeLabel()
+        configureBurnTimeValue()
     }
     
     required init?(coder: NSCoder) {
@@ -188,6 +191,25 @@ final class PageView: UIView {
         
         self.addSubview(fuelAmountValue)
     }
+    
+    // MARK: Configure first step fuel amount
+    
+    private func configureBurnTimeLabel() {
+        burnTimeLabel.text = "Burn Time"
+        burnTimeLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        burnTimeLabel.sizeToFit()
+        
+        self.addSubview(burnTimeLabel)
+    }
+    
+    private func configureBurnTimeValue() {
+        burnTimeValue.text = "\(rocket.firstStage?.burnTimeSec ?? 0) sec"
+        burnTimeValue.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        burnTimeValue.textAlignment = .right
+        
+        self.addSubview(burnTimeValue)
+    }
+    
     // MARK: Layout views on the screen
     
     override func layoutSubviews() {
@@ -261,5 +283,14 @@ final class PageView: UIView {
                                     width: self.frame.size.width - fuelAmountLabel.frame.size.width - 60,
                                     height: 22)
         
+        // Burn Time
+        
+        burnTimeLabel.frame.origin.x = self.safeAreaInsets.left + 20
+        burnTimeLabel.frame.origin.y = fuelAmountLabel.frame.maxY + 16
+        
+        burnTimeValue.frame = CGRect(x: burnTimeLabel.frame.maxX + 20,
+                                     y: burnTimeLabel.frame.origin.y,
+                                     width: self.frame.size.width - burnTimeLabel.frame.size.width - 60,
+                                     height: 22)
     }
 }
